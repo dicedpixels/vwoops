@@ -1,0 +1,10 @@
+{
+  "vwoops.config.title": "Vwoops",
+  "vwoops.config.rest": "Reset",
+  "vwoops.config.done": "Done",
+  "vwoops.config.on": "ON",
+  "vwoops.config.off": "OFF",
+  "vwoops.config.category.flowers": "Flowers",
+  "vwoops.config.category.dirt": "Dirt",
+  "vwoops.config.category.other": "Other"
+}

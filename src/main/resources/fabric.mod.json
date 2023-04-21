@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "vwoops",
+  "version": "${version}",
+  "name": "Vwoops",
+  "description": "Configure what Endermen can pick up.",
+  "authors": [
+    "dicedpixels"
+  ],
+  "contact": {
+    "homepage": "https://github.com/dicedpixels",
+    "sources": "https://github.com/dicedpixels/"
+  },
+  "license": "MIT",
+  "icon": "assets/vwoops/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "preLaunch": [
+      "com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+    ],
+    "client": [
+      "io.github.dicedpixels.vwoops.Vwoops"
+    ],
+    "modmenu": [
+      "io.github.dicedpixels.vwoops.config.VwoopsModMenu"
+    ]
+  },
+  "mixins": [
+    "vwoops.mixins.json"
+  ],
+  "accessWidener": "vwoops.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  }
+}
