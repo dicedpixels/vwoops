@@ -6,6 +6,7 @@ import io.github.dicedpixels.vwoops.VwoopsBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.Screen;
@@ -31,12 +32,12 @@ public class VwoopsConfigScreen extends Screen {
 	}
 
 	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		renderBackground(matrices);
-		this.listWidget.render(matrices, mouseX, mouseY, delta);
+	public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+		renderBackground(context);
+		this.listWidget.render(context, mouseX, mouseY, delta);
 		this.resetButton.active = !VwoopsBlocks.ALL.stream().allMatch(VwoopsConfig::isBlockAllowed);
-		drawCenteredTextWithShadow(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
-		super.render(matrices, mouseX, mouseY, delta);
+		context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 20, 16777215);
+		super.render(context, mouseX, mouseY, delta);
 	}
 
 	@Override
@@ -101,12 +102,12 @@ public class VwoopsConfigScreen extends Screen {
 		}
 
 		@Override
-		public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-			client.getItemRenderer().renderGuiItemIcon(matrices, new ItemStack(this.block.asItem()), x + 1, y + 1);
-			client.textRenderer.draw(matrices, this.block.getName(), x + 24, y + ((float) entryHeight / 3), 16777215);
+		public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
+			context.drawItem(new ItemStack(this.block.asItem()), x + 1, y + 1);
+			context.drawText(client.textRenderer, this.block.getName(), x + 24, y +  entryHeight / 3, 16777215, false);
 			this.toggleButton.setX(x + entryWidth - toggleButton.getWidth() - 2);
 			this.toggleButton.setY(y);
-			this.toggleButton.render(matrices, mouseX, mouseY, tickDelta);
+			this.toggleButton.render(context, mouseX, mouseY, tickDelta);
 		}
 	}
 
@@ -124,8 +125,8 @@ public class VwoopsConfigScreen extends Screen {
 		}
 
 		@Override
-		public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-			drawCenteredTextWithShadow(matrices, client.textRenderer, this.text.copy().formatted(Formatting.BOLD, Formatting.YELLOW), x + entryWidth / 2, y + 8, 16777215);
+		public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
+			context.drawCenteredTextWithShadow(client.textRenderer, this.text.copy().formatted(Formatting.BOLD, Formatting.YELLOW), x + entryWidth / 2, y + 8, 16777215);
 		}
 
 		@Override

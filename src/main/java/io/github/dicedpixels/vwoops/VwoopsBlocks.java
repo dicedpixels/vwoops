@@ -20,7 +20,8 @@ public class VwoopsBlocks {
 			Blocks.OXEYE_DAISY,        // minecraft:oxeye_daisy
 			Blocks.CORNFLOWER,         // minecraft:cornflower
 			Blocks.LILY_OF_THE_VALLEY, // minecraft:lily_of_the_valley
-			Blocks.WITHER_ROSE         // minecraft:wither_rose);
+			Blocks.WITHER_ROSE,        // minecraft:wither_rose);
+			Blocks.TORCHFLOWER		   // minecraft:torchflower
 	);
 
 	public static final ImmutableSet<Block> DIRT = ImmutableSet.of(
