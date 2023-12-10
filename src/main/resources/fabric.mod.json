@@ -1,0 +1,36 @@
+{
+    "schemaVersion": 1,
+    "id": "vwoops",
+    "version": "${version}",
+    "name": "Vwoops",
+    "description": "Provides granular control over which blocks Endermen can pick up.",
+    "authors": [
+        "dicedpixels"
+    ],
+    "contact": {
+        "sources": "https://github.com/dicedpixels/vwoops/"
+    },
+    "license": "MIT",
+    "icon": "assets/vwoops/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "client": [
+            "xyz.dicedpixels.vwoops.client.ClientInitializer"
+        ],
+        "server": [
+            "xyz.dicedpixels.vwoops.ServerInitializer"
+        ],
+        "modmenu": [
+            "xyz.dicedpixels.vwoops.client.compat.ModMenu"
+        ]
+    },
+    "mixins": [
+        "vwoops.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.1",
+        "minecraft": "~1.20.3",
+        "java": ">=17",
+        "fabric-api": "*"
+    }
+}
