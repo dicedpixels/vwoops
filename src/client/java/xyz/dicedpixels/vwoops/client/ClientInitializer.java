@@ -19,7 +19,7 @@ public class ClientInitializer implements ClientModInitializer {
                 .map(Registries.BLOCK::get)
                 .collect(ImmutableSortedSet.toImmutableSortedSet(
                         Comparator.comparing(block -> block.getName().getString())));
-        Vwoops.initRegisteredBlocks(registeredBlocks);
-        Vwoops.init();
+
+        Vwoops.init(registeredBlocks);
     }
 }

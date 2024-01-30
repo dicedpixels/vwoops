@@ -5,7 +5,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.google.gson.annotations.SerializedName;
 
-public class Configuration {
+public class Config {
     @SerializedName("first-run")
     public boolean firstRun = true;
 

@@ -11,22 +11,26 @@ import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
-import xyz.dicedpixels.pixel.config.ConfigurationHandler;
-import xyz.dicedpixels.vwoops.config.Configuration;
+import xyz.dicedpixels.pixel.config.ConfigHandler;
+import xyz.dicedpixels.vwoops.config.Config;
 
 public final class Vwoops {
-    private static final ConfigurationHandler HANDLER =
-            ConfigurationHandler.builder().with("vwoops").build();
-    private static final Configuration CONFIG = HANDLER.load(Configuration.class);
+    private static final ConfigHandler HANDLER = ConfigHandler.of("vwoops");
+    private static final Config CONFIG = HANDLER.load(Config.class);
     private static ImmutableSortedSet<Block> registeredBlocks;
     private static boolean firstRun;
     private static Set<Block> allowedBlocks;
 
-    public static void init() {
+    public static void init(ImmutableSortedSet<Block> registeredBlocks) {
         allowedBlocks = CONFIG.allowedBlocks.stream()
                 .map(id -> Registries.BLOCK.get(new Identifier(id)))
                 .collect(Collectors.toSet());
         firstRun = CONFIG.firstRun;
+
+        if (Vwoops.registeredBlocks == null) {
+            Vwoops.registeredBlocks = registeredBlocks;
+        }
+
         if (firstRun) {
             allowedBlocks.addAll(registeredBlocks);
             firstRun = false;
@@ -36,12 +40,6 @@ public final class Vwoops {
 
     public static ImmutableSortedSet<Block> registeredBlocks() {
         return registeredBlocks;
-    }
-
-    public static void initRegisteredBlocks(ImmutableSortedSet<Block> registeredBlocks) {
-        if (Vwoops.registeredBlocks == null) {
-            Vwoops.registeredBlocks = registeredBlocks;
-        }
     }
 
     public static ImmutableSet<Block> allowedBlocks() {
@@ -72,6 +70,7 @@ public final class Vwoops {
             save();
             return true;
         }
+
         return false;
     }
 
@@ -81,6 +80,7 @@ public final class Vwoops {
         } else {
             allowedBlocks.add(block);
         }
+
         save();
     }
 

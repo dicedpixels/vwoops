@@ -9,12 +9,13 @@ import net.minecraft.client.gui.widget.DirectionalLayoutWidget;
 import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TextWidget;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import xyz.dicedpixels.pixel.client.screen.AbstractScreen;
 import xyz.dicedpixels.vwoops.Vwoops;
 import xyz.dicedpixels.vwoops.client.screen.widget.ListWidget;
-import xyz.dicedpixels.vwoops.client.util.Texts;
 
 public class ConfigurationScreen extends AbstractScreen {
     private final Screen parent;
@@ -28,15 +29,22 @@ public class ConfigurationScreen extends AbstractScreen {
     @Override
     protected void init() {
         var list = addDrawableChild(new ListWidget(client, width, height - 90, 10, 25));
-        Vwoops.registeredBlocks().forEach(list::addEntry);
-        search = new TextFieldWidget(textRenderer, 200, 20, Text.empty());
-        search.setChangedListener(list::filter);
         var grid = new GridWidget().setSpacing(5);
         var adder = grid.createAdder(1);
         var buttons = DirectionalLayoutWidget.horizontal().spacing(5);
+
+        Vwoops.registeredBlocks().forEach(list::addEntry);
+
+        search = new TextFieldWidget(textRenderer, 200, 20, Text.empty());
+        search.setChangedListener(list::filter);
+        search.setPlaceholder(Text.translatable("vwoops.config.search")
+                .append(ScreenTexts.ELLIPSIS)
+                .formatted(Formatting.DARK_GRAY));
+
         adder.add(new TextWidget(title, textRenderer));
         adder.add(search);
-        buttons.add(ButtonWidget.builder(Texts.RESET, button -> {
+
+        buttons.add(ButtonWidget.builder(Text.translatable("vwoops.config.reset"), button -> {
                     search.setText(StringUtils.EMPTY);
                     Vwoops.allowAllBlocks();
                     list.reset();
@@ -44,10 +52,13 @@ public class ConfigurationScreen extends AbstractScreen {
                 })
                 .width(200 / 4)
                 .build());
-        buttons.add(ButtonWidget.builder(Texts.DONE, button -> close())
+
+        buttons.add(ButtonWidget.builder(Text.translatable("vwoops.config.done"), button -> close())
                 .width((200 / 4 * 3) - 5)
                 .build());
+
         adder.add(buttons);
+
         grid.refreshPositions();
         grid.setPosition(10, height - grid.getHeight() - 10);
         grid.forEachChild(this::addDrawableChild);

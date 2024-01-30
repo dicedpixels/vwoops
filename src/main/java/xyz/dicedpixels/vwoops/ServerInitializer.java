@@ -22,10 +22,11 @@ public class ServerInitializer implements DedicatedServerModInitializer {
                     .filter(block -> TagUtil.isIn(BlockTags.ENDERMAN_HOLDABLE, block))
                     .collect(ImmutableSortedSet.toImmutableSortedSet(
                             Comparator.comparing(block -> block.getName().getString())));
-            Vwoops.initRegisteredBlocks(registeredBlocks);
-            Vwoops.init();
+            Vwoops.init(registeredBlocks);
         });
+
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> Vwoops.save());
+
         CommandRegistrationCallback.EVENT.register(
                 (dispatcher, registry, env) -> VwoopsCommand.register(dispatcher, registry));
     }

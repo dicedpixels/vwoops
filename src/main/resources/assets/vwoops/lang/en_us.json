@@ -1,6 +1,8 @@
 {
-    "vwoops.reset": "Reset",
-    "vwoops.done": "Done",
-    "vwoops.allow": "Allow",
-    "vwoops.deny": "Deny"
+    "vwoops.config.reset": "Reset",
+    "vwoops.config.done": "Done",
+    "vwoops.config.pick-up": "Pick Up",
+    "vwoops.config.allowed": "Allowed",
+    "vwoops.config.denied": "Denied",
+    "vwoops.config.search": "Search"
 }

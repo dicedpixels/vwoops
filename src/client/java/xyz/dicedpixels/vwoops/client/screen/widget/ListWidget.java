@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 
 import xyz.dicedpixels.pixel.client.screen.entry.AbstractEntry;
 import xyz.dicedpixels.pixel.client.screen.widget.AbstractListWidget;
@@ -28,6 +29,7 @@ public class ListWidget extends AbstractListWidget<AbstractEntry> {
 
     public void filter(String text) {
         clearEntries();
+
         if (!text.isEmpty()) {
             entries.stream()
                     .filter(entry -> StringUtils.containsIgnoreCase(
@@ -36,11 +38,38 @@ public class ListWidget extends AbstractListWidget<AbstractEntry> {
         } else {
             entries.forEach(this::addEntry);
         }
+
         setScrollAmount(0);
     }
 
     public void reset() {
         clearEntries();
         setScrollAmount(0);
+    }
+
+    @Override
+    public int getRowWidth() {
+        return super.getRowWidth() + 80;
+    }
+
+    @Override
+    protected boolean isSelectedEntry(int index) {
+        var selected = getSelectedOrNull();
+        return selected != null && selected == children().get(index);
+    }
+
+    @Override
+    protected void drawSelectionHighlight(
+            DrawContext context, int y, int entryWidth, int entryHeight, int borderColor, int fillColor) {
+        var x1 = getX() + (width - entryWidth) / 2;
+        var x2 = getX() + (width + entryWidth) / 2;
+
+        context.fill(x1 + 1, y - 1, x2 - 1, y + entryHeight, 0xFF0A0A0A);
+    }
+
+    @Override
+    public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
+        setSelected(getHoveredEntry());
+        super.renderWidget(context, mouseX, mouseY, delta);
     }
 }

@@ -13,11 +13,11 @@ import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import xyz.dicedpixels.pixel.client.screen.entry.AbstractEntry;
 import xyz.dicedpixels.vwoops.Vwoops;
 import xyz.dicedpixels.vwoops.client.screen.widget.BlockItemWidget;
-import xyz.dicedpixels.vwoops.client.util.Texts;
 
 public class BlockEntry extends AbstractEntry {
     private final List<ClickableWidget> children = Lists.newArrayList();
@@ -27,17 +27,30 @@ public class BlockEntry extends AbstractEntry {
     private BlockEntry(Block block) {
         this.block = block;
         layout = DirectionalLayoutWidget.horizontal().spacing(5);
-        var toggle = CyclingButtonWidget.onOffBuilder(Texts.DENY, Texts.ALLOW)
-                .omitKeyText()
+
+        var toggle = CyclingButtonWidget.onOffBuilder(
+                        Text.translatable("vwoops.config.denied").formatted(Formatting.RED),
+                        Text.translatable("vwoops.config.allowed").formatted(Formatting.GREEN))
                 .initially(Vwoops.allowedBlocks().contains(block))
-                .build(0, 0, 40, 20, Text.empty(), (button, value) -> Vwoops.toggleBlock(block));
-        layout.add(new BlockItemWidget(block));
-        var name = new TextWidget(150, 18, block.getName(), MinecraftClient.getInstance().textRenderer).alignLeft();
-        name.setTooltip(Tooltip.of(Text.of(Registries.BLOCK.getId(block))));
+                .build(
+                        0,
+                        0,
+                        90,
+                        20,
+                        Text.translatable("vwoops.config.pick-up"),
+                        (button, value) -> Vwoops.toggleBlock(block));
+
+        var name = new TextWidget(180, 18, block.getName(), MinecraftClient.getInstance().textRenderer).alignLeft();
         var spacer = DirectionalLayoutWidget.vertical();
+
+        layout.add(new BlockItemWidget(block), Positioner::alignVerticalCenter);
+
+        name.setTooltip(Tooltip.of(Text.of(Registries.BLOCK.getId(block))));
+
         spacer.add(EmptyWidget.ofHeight(2));
         spacer.add(name);
         spacer.refreshPositions();
+
         layout.add(spacer);
         layout.add(toggle);
         layout.refreshPositions();
