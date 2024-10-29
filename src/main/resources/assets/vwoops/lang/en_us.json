@@ -1,0 +1,11 @@
+{
+    "vwoops.command.will_hold": "Endermen will hold %s",
+    "vwoops.command.will_hold_all": "Endermen will hold all blocks in %s",
+    "vwoops.command.will_not_hold": "Endermen will not hold %s",
+    "vwoops.command.will_not_hold_all": "Endermen will not hold any blocks in %s",
+    "vwoops.command.output": "%s %s",
+    "vwoops.gui.yes": "YES",
+    "vwoops.gui.no": "NO",
+    "vwoops.gui.reset": "Reset",
+    "vwoops.gui.done": "Done"
+}
