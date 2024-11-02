@@ -2,7 +2,9 @@
     "required": true,
     "package": "xyz.dicedpixels.vwoops.mixin",
     "compatibilityLevel": "JAVA_21",
-    "mixins": [],
+    "mixins": [
+        "PickUpBlockGoalMixin"
+    ],
     "injectors": {
         "defaultRequire": 1
     }

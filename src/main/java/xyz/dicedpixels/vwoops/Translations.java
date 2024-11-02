@@ -3,16 +3,19 @@ package xyz.dicedpixels.vwoops;
 import java.util.function.Function;
 
 import net.minecraft.block.Block;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 public class Translations {
-    private static final Text ENDERMAN_HOLDABLE = Text.literal("#enderman_holdable").formatted(Formatting.LIGHT_PURPLE);
-    private static final Text INDICATOR = Text.literal("|").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD);
     public static final Text DONE = Text.translatable("vwoops.gui.done");
-    public static final Text YES = Text.translatable("vwoops.gui.yes");
+    public static final Text HOLDABALE = Text.translatable("vwoops.gui.holdable");
     public static final Text NO = Text.translatable("vwoops.gui.no");
     public static final Text RESET = Text.translatable("vwoops.gui.reset");
+    public static final MutableText SEARCH = Text.translatable("vwoops.gui.search");
+    public static final Text YES = Text.translatable("vwoops.gui.yes");
+    private static final Text ENDERMAN_HOLDABLE = Text.literal("#enderman_holdable").formatted(Formatting.LIGHT_PURPLE);
+    private static final Text INDICATOR = Text.literal("|").formatted(Formatting.LIGHT_PURPLE, Formatting.BOLD);
     public static final Function<Block, Text> WILL_HOLD = block -> withIndicator("vwoops.command.will_hold", "Endermen will hold %s", block);
     public static final Text WILL_HOLD_ALL = withIndicator("vwoops.command.will_hold_all", "Endermen will hold all blocks in %s");
     public static final Function<Block, Text> WILL_NOT_HOLD = block -> withIndicator("vwoops.command.will_not_hold", "Endermen will not hold %s", block);

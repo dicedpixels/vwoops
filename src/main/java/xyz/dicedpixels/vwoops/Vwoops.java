@@ -16,9 +16,9 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 
 public class Vwoops {
-    public static Set<Block> blocksInTag;
-    public static Set<Block> holdableBlocks;
     private static DefaultedRegistry<Block> blockRegistry;
+    private static Set<Block> blocksInTag;
+    private static Set<Block> holdableBlocks;
     private static Path worldRoot;
 
     public static boolean addAllBlocks() {
@@ -31,6 +31,10 @@ public class Vwoops {
         var result = holdableBlocks.add(block);
         save();
         return result;
+    }
+
+    public static int compareBlockNames(Block first, Block second) {
+        return first.getName().getString().compareTo(second.getName().getString());
     }
 
     public static Set<Block> getBlocksInTag() {
@@ -78,5 +82,15 @@ public class Vwoops {
 
     public static void save() {
         Config.save(worldRoot, holdableBlocks.stream().map(block -> blockRegistry.getId(block).toString()).collect(Collectors.toSet()));
+    }
+
+    public static void toggleBlock(Block block) {
+        if (holdableBlocks.contains(block)) {
+            holdableBlocks.remove(block);
+        } else {
+            holdableBlocks.add(block);
+        }
+
+        save();
     }
 }

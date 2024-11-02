@@ -1,6 +1,5 @@
 package xyz.dicedpixels.vwoops;
 
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.WorldSavePath;
 
