@@ -8,6 +8,7 @@
     "vwoops.gui.holdable": "Holdable",
     "vwoops.gui.no": "NO",
     "vwoops.gui.reset": "Reset",
+    "vwoops.gui.reset.tooltip": "Set all blocks holdable. (Shift to invert)",
     "vwoops.gui.search": "Search...",
     "vwoops.gui.yes": "YES"
 }

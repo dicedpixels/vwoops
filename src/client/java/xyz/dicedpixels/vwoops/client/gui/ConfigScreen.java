@@ -1,6 +1,7 @@
 package xyz.dicedpixels.vwoops.client.gui;
 
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.DirectionalLayoutWidget;
 import net.minecraft.client.gui.widget.GridWidget;
@@ -45,7 +46,7 @@ public class ConfigScreen extends Screen {
         adder.add(new TextWidget(title, textRenderer));
         adder.add(searchField);
 
-        buttonsLayout.add(ButtonWidget.builder(Translations.RESET, button -> resetConfig()).width(200 / 4).build());
+        buttonsLayout.add(ButtonWidget.builder(Translations.RESET, button -> resetConfig()).width(200 / 4).tooltip(Tooltip.of(Translations.RESET_TOOLTIP)).build());
         buttonsLayout.add(ButtonWidget.builder(Translations.DONE, button -> close()).width((200 / 4 * 3) - 5).build());
 
         adder.add(buttonsLayout);
@@ -57,7 +58,13 @@ public class ConfigScreen extends Screen {
 
     public void resetConfig() {
         searchField.setText("");
-        Vwoops.addAllBlocks();
+
+        if (Screen.hasShiftDown()) {
+            Vwoops.removeAllBlocks();
+        } else {
+            Vwoops.addAllBlocks();
+        }
+
         list.clearConfigEntries();
         list.addConfigEntries(Vwoops.getBlocksInTag().stream().sorted(Vwoops::compareBlockNames));
     }
