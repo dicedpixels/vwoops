@@ -1,6 +1,7 @@
 package xyz.dicedpixels.vwoops;
 
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.util.WorldSavePath;
 
 import net.fabricmc.api.ModInitializer;
@@ -15,7 +16,9 @@ public class Initializer implements ModInitializer {
         });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            Commands.register(dispatcher, registryAccess);
+            if (environment == CommandManager.RegistrationEnvironment.DEDICATED) {
+                Commands.register(dispatcher, registryAccess);
+            }
         });
     }
 }
