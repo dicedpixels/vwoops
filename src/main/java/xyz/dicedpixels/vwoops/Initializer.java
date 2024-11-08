@@ -12,7 +12,7 @@ public class Initializer implements ModInitializer {
     @Override
     public void onInitialize() {
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            Vwoops.init(server.getSavePath(WorldSavePath.ROOT), server.getRegistryManager().get(RegistryKeys.BLOCK));
+            Vwoops.init(server.getSavePath(WorldSavePath.ROOT), server.getRegistryManager().getOrThrow(RegistryKeys.BLOCK));
         });
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
