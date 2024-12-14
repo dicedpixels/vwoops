@@ -69,7 +69,7 @@ public class ConfigListWidget extends ElementListWidget<ConfigEntry> {
             entries.stream().filter(entry -> StringUtils.containsIgnoreCase(entry.getBlockName(), text)).forEach(this::addEntry);
         }
 
-        setScrollAmount(0);
+        setScrollY(0);
     }
 
     @Override
