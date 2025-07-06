@@ -1,14 +1,13 @@
 {
-    "vwoops.command.output": "%s %s",
     "vwoops.command.will_hold": "Endermen will hold %s",
     "vwoops.command.will_hold_all": "Endermen will hold all blocks in %s",
     "vwoops.command.will_not_hold": "Endermen will not hold %s",
     "vwoops.command.will_not_hold_all": "Endermen will not hold any blocks in %s",
-    "vwoops.gui.done": "Done",
-    "vwoops.gui.holdable": "Holdable",
-    "vwoops.gui.no": "NO",
-    "vwoops.gui.reset": "Reset",
-    "vwoops.gui.reset.tooltip": "Set all blocks holdable. (Shift to invert)",
-    "vwoops.gui.search": "Search...",
-    "vwoops.gui.yes": "YES"
+    "vwoops.gui.config.done": "Done",
+    "vwoops.gui.config.holdable": "Holdable",
+    "vwoops.gui.config.no": "NO",
+    "vwoops.gui.config.reset": "Reset",
+    "vwoops.gui.config.reset_tooltip": "Set all blocks holdable. (Shift to invert)",
+    "vwoops.gui.config.search": "Search...",
+    "vwoops.gui.config.yes": "YES"
 }

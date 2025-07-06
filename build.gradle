@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.9-SNAPSHOT"
+    id "fabric-loom" version "${loom_version}"
 }
 
 version = "${project.mod_version}+${project.minecraft_version}"
@@ -7,12 +7,6 @@ group = project.maven_group
 
 base {
     archivesName = project.mod_id
-}
-
-repositories {
-    maven {
-        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-    }
 }
 
 loom {
@@ -30,7 +24,6 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    vineflowerDecompilerClasspath "org.vineflower:vineflower:${project.vineflower_version}"
 }
 
 processResources {

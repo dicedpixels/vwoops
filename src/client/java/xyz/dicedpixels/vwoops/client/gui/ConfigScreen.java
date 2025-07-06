@@ -8,9 +8,8 @@ import net.minecraft.client.gui.widget.GridWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
-import xyz.dicedpixels.vwoops.Translations;
+import xyz.dicedpixels.vwoops.Blocks;
 import xyz.dicedpixels.vwoops.Vwoops;
 
 public class ConfigScreen extends Screen {
@@ -19,7 +18,7 @@ public class ConfigScreen extends Screen {
     private TextFieldWidget searchField;
 
     public ConfigScreen(Screen parentScreen) {
-        super(Text.literal("Vwoops"));
+        super(Vwoops.TITLE);
         this.parentScreen = parentScreen;
     }
 
@@ -33,21 +32,30 @@ public class ConfigScreen extends Screen {
     @Override
     protected void init() {
         searchField = new TextFieldWidget(textRenderer, 0, 0, 200, 20, searchField, Text.empty());
-        searchField.setPlaceholder(Translations.SEARCH.formatted(Formatting.DARK_GRAY));
+        searchField.setPlaceholder(Text.translatable("vwoops.gui.config.search").styled(style -> style.withColor(0x555555)));
         searchField.setChangedListener(text -> list.filterConfigEntries(text));
 
         list = addDrawableChild(new ConfigListWidget(client, width, height - 90, 10, 24));
-        list.addConfigEntries(Vwoops.getBlocksInTag().stream().sorted(Vwoops::compareBlockNames));
+        list.addConfigEntries(Blocks.getBlocksInTagSorted());
 
         var mainGrid = new GridWidget().setSpacing(5);
         var adder = mainGrid.createAdder(1);
         var buttonsLayout = DirectionalLayoutWidget.horizontal().spacing(5);
+        var titleLayout = DirectionalLayoutWidget.horizontal().spacing(5);
 
-        adder.add(new TextWidget(title, textRenderer));
+        titleLayout.add(new TextWidget(title, textRenderer));
+        titleLayout.add(new TextWidget(Vwoops.getVersion(), textRenderer));
+
+        adder.add(titleLayout);
         adder.add(searchField);
 
-        buttonsLayout.add(ButtonWidget.builder(Translations.RESET, button -> resetConfig()).width(200 / 4).tooltip(Tooltip.of(Translations.RESET_TOOLTIP)).build());
-        buttonsLayout.add(ButtonWidget.builder(Translations.DONE, button -> close()).width((200 / 4 * 3) - 5).build());
+        var resetButton = ButtonWidget.builder(Text.translatable("vwoops.gui.config.reset"), button -> resetConfig())
+            .width(200 / 4)
+            .tooltip(Tooltip.of(Text.translatable("vwoops.gui.config.reset_tooltip")))
+            .build();
+
+        buttonsLayout.add(resetButton);
+        buttonsLayout.add(ButtonWidget.builder(Text.translatable("vwoops.gui.config.done"), button -> close()).width((200 / 4 * 3) - 5).build());
 
         adder.add(buttonsLayout);
 
@@ -60,12 +68,12 @@ public class ConfigScreen extends Screen {
         searchField.setText("");
 
         if (Screen.hasShiftDown()) {
-            Vwoops.removeAllBlocks();
+            Blocks.removeAllBlocks();
         } else {
-            Vwoops.addAllBlocks();
+            Blocks.addAllBlocks();
         }
 
         list.clearConfigEntries();
-        list.addConfigEntries(Vwoops.getBlocksInTag().stream().sorted(Vwoops::compareBlockNames));
+        list.addConfigEntries(Blocks.getBlocksInTagSorted());
     }
 }

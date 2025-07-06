@@ -9,12 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.tag.TagKey;
 
-import xyz.dicedpixels.vwoops.Vwoops;
+import xyz.dicedpixels.vwoops.Blocks;
 
 @Mixin(targets = "net.minecraft.entity.mob.EndermanEntity$PickUpBlockGoal")
 abstract class PickUpBlockGoalMixin {
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"))
     private boolean vwoops$isBlockAllowed(BlockState blockState, TagKey<Block> tagKey, Operation<Boolean> original) {
-        return Vwoops.getHoldableBlocks().contains(blockState.getBlock());
+        return Blocks.getHoldableBlocks().contains(blockState.getBlock());
     }
 }
