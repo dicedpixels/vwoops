@@ -57,7 +57,7 @@ public class Blocks {
     public static void init(Path worldRoot) {
         Blocks.worldRoot = worldRoot;
         holdableBlocks.clear();
-        blocksInTag.clear();
+        blocksInTag = new HashSet<>();
 
         var configs = ConfigManager.load(worldRoot);
 
