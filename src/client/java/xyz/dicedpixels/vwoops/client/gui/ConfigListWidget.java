@@ -32,14 +32,6 @@ public class ConfigListWidget extends ElementListWidget<ConfigEntry> {
         entries.clear();
     }
 
-    @Override
-    protected void drawSelectionHighlight(DrawContext context, int y, int entryWidth, int entryHeight, int borderColor, int fillColor) {
-        var x1 = getX() + (width - entryWidth) / 2;
-        var x2 = getX() + (width + entryWidth) / 2;
-
-        context.fill(x1, y - 2, x2, y + entryHeight, 0x40FFFFFF);
-    }
-
     public void filterConfigEntries(String text) {
         clearEntries();
 
@@ -62,15 +54,7 @@ public class ConfigListWidget extends ElementListWidget<ConfigEntry> {
     }
 
     @Override
-    protected boolean isSelectedEntry(int index) {
-        var selected = getSelectedOrNull();
-
-        return selected != null && selected == children().get(index);
-    }
-
-    @Override
     public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
-        setSelected(getHoveredEntry());
         super.renderWidget(context, mouseX, mouseY, delta);
     }
 }

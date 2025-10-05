@@ -67,7 +67,7 @@ public class ConfigScreen extends Screen {
     public void resetConfig() {
         searchField.setText("");
 
-        if (Screen.hasShiftDown()) {
+        if (client != null && client.isShiftPressed()) {
             Blocks.removeAllBlocks();
         } else {
             Blocks.addAllBlocks();

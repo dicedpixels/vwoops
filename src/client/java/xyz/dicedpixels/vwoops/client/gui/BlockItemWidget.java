@@ -34,7 +34,7 @@ public class BlockItemWidget extends ClickableWidget {
     }
 
     @Override
-    public boolean isNarratable() {
+    public boolean isInteractable() {
         return false;
     }
 

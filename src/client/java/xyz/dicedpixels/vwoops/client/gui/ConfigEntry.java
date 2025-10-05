@@ -29,7 +29,7 @@ public class ConfigEntry extends Entry<ConfigEntry> {
         var toggleButton = CyclingButtonWidget.onOffBuilder(Text.translatable("vwoops.gui.config.yes"), Text.translatable("vwoops.gui.config.no"))
             .initially(Blocks.getHoldableBlocks().contains(block))
             .build(0, 0, 90, 20, Text.translatable("vwoops.gui.config.holdable"), (button, value) -> Blocks.toggleBlock(block));
-        var blockNameText = new TextWidget(300 - 10 - 90 - 22, 22, block.getName(), client.textRenderer).alignLeft();
+        var blockNameText = new TextWidget(300 - 10 - 90 - 22, 22, block.getName(), client.textRenderer);
 
         layout.add(new BlockItemWidget(block));
         layout.add(blockNameText);
@@ -52,8 +52,17 @@ public class ConfigEntry extends Entry<ConfigEntry> {
     }
 
     @Override
-    public void render(DrawContext context, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float deltaTicks) {
-        layout.setPosition(x - 1, y - 1);
+    public void render(DrawContext context, int mouseX, int mouseY, boolean hovered, float deltaTicks) {
+        if (hovered) {
+            var xStart = getX();
+            var yStart = getY();
+            var xEnd = xStart + getWidth();
+            var yEnd = yStart + getHeight();
+
+            context.fill(xStart - 2, yStart - 2, xEnd - 2, yEnd - 4, 0x40FFFFFF);
+        }
+
+        layout.setPosition(getX() - 1, getY() - 1);
         layout.forEachChild(widget -> widget.render(context, mouseX, mouseY, deltaTicks));
     }
 
