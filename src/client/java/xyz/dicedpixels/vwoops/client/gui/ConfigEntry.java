@@ -26,8 +26,7 @@ public class ConfigEntry extends Entry<ConfigEntry> {
     private ConfigEntry(MinecraftClient client, Block block) {
         blockName = block.getName().getString();
 
-        var toggleButton = CyclingButtonWidget.onOffBuilder(Text.translatable("vwoops.gui.config.yes"), Text.translatable("vwoops.gui.config.no"))
-            .initially(Blocks.getHoldableBlocks().contains(block))
+        var toggleButton = CyclingButtonWidget.onOffBuilder(Text.translatable("vwoops.gui.config.yes"), Text.translatable("vwoops.gui.config.no"), Blocks.getHoldableBlocks().contains(block))
             .build(0, 0, 90, 20, Text.translatable("vwoops.gui.config.holdable"), (button, value) -> Blocks.toggleBlock(block));
         var blockNameText = new TextWidget(300 - 10 - 90 - 22, 22, block.getName(), client.textRenderer);
 

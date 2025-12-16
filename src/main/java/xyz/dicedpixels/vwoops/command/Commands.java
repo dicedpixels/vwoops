@@ -32,7 +32,7 @@ public class Commands {
 
     public static void registerServerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registry) {
         dispatcher.register(CommandManager.literal("vwoops")
-            .requires(source -> source.hasPermissionLevel(2))
+            .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
             .then(CommandManager.literal("add")
                 .then(Commands.argument(registry)
                     .suggests((context, builder) -> CommandSource.suggestFromIdentifier(Blocks.streamNonHoldableBlocks(), builder, Registries.BLOCK::getId, Block::getName))
