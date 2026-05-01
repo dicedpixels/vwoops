@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> Busy with IRL work, kinda burnt out, chipping at this slowly.
+
+[![cat.jpg](https://i.postimg.cc/024VQ142/cat.jpg)](https://postimg.cc/JGbN6vm9)
+
 # Vwoops
 
 Provides granular control over which blocks Endermen can pick up.
